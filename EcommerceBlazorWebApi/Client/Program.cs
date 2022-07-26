@@ -1,3 +1,4 @@
+global using EcommerceBlazorWebApi.Shared;
 using EcommerceBlazorWebApi.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
