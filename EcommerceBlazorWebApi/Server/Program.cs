@@ -1,7 +1,6 @@
 global using EcommerceBlazorWebApi.Shared;
 global using Microsoft.EntityFrameworkCore;
-using EcommerceBlazorWebApi.Server.Data;
-using Microsoft.AspNetCore.ResponseCompression;
+global using EcommerceBlazorWebApi.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
