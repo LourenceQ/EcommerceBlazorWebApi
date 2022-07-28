@@ -1,28 +1,23 @@
 ﻿using EcommerceBlazorWebApi.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EcommerceBlazorWebApi.Server.Controllers
+namespace EcommerceBlazorWebApi.Server.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ProductController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    private readonly IProductService _productService;
+
+    public ProductController(IProductService productService)
     {
-        private readonly DataContext _context;
-        public ProductController(DataContext context)
-        {
-            _context = context;
-        }
+        _productService = productService;
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProduct()
-        {
-            var products = await _context.Products.ToListAsync();
-            var response = new ServiceResponse<List<Product>>()
-            {
-                Data = products 
-            };
-
-            return Ok(response);
-        }
+    [HttpGet]
+    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProduct()
+    {
+        var result = await _productService.GetProductsAsync();
+        return Ok(result);
     }
 }
