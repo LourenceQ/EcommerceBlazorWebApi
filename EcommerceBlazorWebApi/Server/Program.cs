@@ -1,6 +1,7 @@
 global using EcommerceBlazorWebApi.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using EcommerceBlazorWebApi.Server.Data;
+global using EcommerceBlazorWebApi.Server.Services.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         .Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
