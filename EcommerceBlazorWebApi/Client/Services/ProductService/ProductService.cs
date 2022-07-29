@@ -1,31 +1,30 @@
-﻿namespace EcommerceBlazorWebApi.Client.Services.ProductService
+﻿namespace EcommerceBlazorWebApi.Client.Services.ProductService;
+
+public class ProductService : IProductService
 {
-    public class ProductService : IProductService
+    private readonly HttpClient _http;
+
+    public ProductService(HttpClient http)
     {
-        private readonly HttpClient _http;
+        _http = http;
+    }
 
-        public ProductService(HttpClient http)
-        {
-            _http = http;
-        }
+    public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
 
-        public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
+    public async Task<ServiceResponse<Product>> GetProductById(int productId)
+    {
+        var result = await _http
+            .GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
 
-        public async Task<ServiceResponse<Product>> GetProductById(int productId)
-        {
-            var result = await _http
-                .GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
+        return result;
+    }
 
-            return result;
-        }
+    public async Task GetProducts()
+    {
+        var result = await _http
+            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>("api/product");
 
-        public async Task GetProducts()
-        {
-            var result = await _http
-                .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>("api/product");
-
-            if (result != null && result.Data != null)
-                Products = result.Data;
-        }
+        if (result != null && result.Data != null)
+            Products = result.Data;
     }
 }
