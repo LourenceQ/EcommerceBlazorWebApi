@@ -16,7 +16,7 @@ public class ProductService : IProductService
         var result = await _http
             .GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
 
-        return result;
+        return result!;
     }
 
     public async Task GetProducts()
