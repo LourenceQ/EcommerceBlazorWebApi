@@ -2,6 +2,7 @@ global using EcommerceBlazorWebApi.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using EcommerceBlazorWebApi.Server.Data;
 global using EcommerceBlazorWebApi.Server.Services.ProductService;
+global using EcommerceBlazorWebApi.Server.Services.CategoryService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
@@ -39,7 +41,6 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.MapRazorPages();
 app.MapControllers();
