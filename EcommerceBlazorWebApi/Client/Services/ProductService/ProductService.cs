@@ -27,7 +27,8 @@ public class ProductService : IProductService
             await _http
             .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>("api/product"):
             await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>($"api/product/category/{categoryUrl}"); ;
+            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>(
+                $"api/product/category/{categoryUrl}");
 
         if (result != null && result.Data != null)
             Products = result.Data;

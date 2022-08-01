@@ -36,12 +36,13 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsByCategory(string categoryUrl)
+    public async Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsByCategory(
+        string categoryUrl)
     {
         var response = new ServiceResponse<IReadOnlyList<Product>>
         {
-            Data = await _context
-                .Products.Where(p => p.Category!.Url.ToLower().Equals(categoryUrl.ToLower()))
+            Data = await _context.Products.Where(p => 
+                p.Category!.Url.ToLower().Equals(categoryUrl.ToLower()))
                 .ToListAsync()  
         };
 
