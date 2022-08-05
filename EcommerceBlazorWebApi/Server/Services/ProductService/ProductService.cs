@@ -23,9 +23,7 @@ public class ProductService : IProductService
             response.Message = "Product does not exist.";
         }
         else
-        {
             response.Data = product;
-        }
 
         return response;
     }
@@ -54,5 +52,42 @@ public class ProductService : IProductService
         };
 
         return response;
+    }
+
+    public async Task<ServiceResponse<IReadOnlyList<string>>> GetProductSearchSugestions(string searchText)
+    {
+        var products = await FindProductBySearchText(searchText);
+
+        List<string> result = new List<string>();
+
+        foreach(var product in products)
+        {
+            if(product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+            {
+                result.Add(product.Title);
+            }
+        }
+
+        return new ServiceResponse<IReadOnlyList<string>> { Data = result };
+    }
+
+    public async Task<ServiceResponse<IReadOnlyList<Product>>> SearchProducts(string searchText)
+    {
+        var response = new ServiceResponse<IReadOnlyList<Product>>
+        {
+            Data = await FindProductBySearchText(searchText)
+        };
+
+        return response;
+    }
+
+    private async Task<List<Product>> FindProductBySearchText(string searchText)
+    {
+        return await _context.Products
+                        .Where(p => p.Title.ToLower().Contains(searchText.ToLower())
+                        ||
+                        p.Description.ToLower().Contains(searchText.ToLower()))
+                        .Include(p => p.Variants)
+                        .ToListAsync();
     }
 }
