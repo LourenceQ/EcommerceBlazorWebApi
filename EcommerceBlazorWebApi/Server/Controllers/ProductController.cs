@@ -44,10 +44,10 @@ public class ProductController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("searchsugestions/{searchText}")]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProductSearchSugestions(string searchText)
+    [HttpGet("searchsuggestions/{searchText}")]
+    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProductSearchSuggestions(string searchText)
     {
-        var result = await _productService.GetProductSearchSugestions(searchText);
+        var result = await _productService.GetProductSearchSuggestions(searchText);
 
         return Ok(result);
     }

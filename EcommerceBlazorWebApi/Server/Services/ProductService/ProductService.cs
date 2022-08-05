@@ -54,7 +54,7 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<string>>> GetProductSearchSugestions(string searchText)
+    public async Task<ServiceResponse<IReadOnlyList<string>>> GetProductSearchSuggestions(string searchText)
     {
         var products = await FindProductBySearchText(searchText);
 
