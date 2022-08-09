@@ -9,15 +9,15 @@
         list="products"
         @onkeyup="HandleSearch"
         class="form-control"
-        placeholder="Serach..."
+        placeholder="Search..."
         @ref="searchInput"/>
 
     <datalist id="products">
         @foreach (var suggestion in suggestions)
        {
-           <onption>
+           <option>
                @suggestion
-           </onption>
+           </option>
        }
     </datalist>
 
