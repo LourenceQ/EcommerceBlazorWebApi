@@ -9,7 +9,7 @@ public class ProductService : IProductService
         _http = http;
     }
 
-    public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
+    public List<Product> Products { get; set; } = new List<Product>();
 
     public string Message { get; set; } = "Loading products";
 
@@ -27,9 +27,9 @@ public class ProductService : IProductService
     {
         var result = categoryUrl == null ? 
             await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>("api/product"):
+            .GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product"):
             await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>(
+            .GetFromJsonAsync<ServiceResponse<List<Product>>>(
                 $"api/product/category/{categoryUrl}");
 
         if (result != null && result.Data != null)
@@ -38,10 +38,10 @@ public class ProductService : IProductService
         ProductsChanged.Invoke();
     }
 
-    public async Task<IReadOnlyCollection<string>> GetProductSearchSuggestions(string searchText)
+    public async Task<List<string>> GetProductSearchSuggestions(string searchText)
     {
         var result = await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<string>>>($"api/product/searchsuggestions/{searchText}");
+            .GetFromJsonAsync<ServiceResponse<List<string>>>($"api/product/searchsuggestions/{searchText}");
 
         return result.Data;
     }
@@ -49,7 +49,7 @@ public class ProductService : IProductService
     public async Task SearchProducts(string searchText)
     {
         var result = await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Product>>>($"api/product/search/{searchText}");
+            .GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/search/{searchText}");
 
         if (result != null && result.Data != null)
             Products = result.Data;
