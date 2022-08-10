@@ -27,7 +27,7 @@ public class ProductService : IProductService
     {
         var result = categoryUrl == null ? 
             await _http
-            .GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product"):
+            .GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product/featured"):
             await _http
             .GetFromJsonAsync<ServiceResponse<List<Product>>>(
                 $"api/product/category/{categoryUrl}");
