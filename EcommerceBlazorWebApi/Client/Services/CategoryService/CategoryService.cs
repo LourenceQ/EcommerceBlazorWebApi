@@ -15,6 +15,7 @@ public class CategoryService : ICategoryService
     {
         var response = await _http
             .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Category>>>("api/category");
+
         if(response != null && response.Data!= null)
             Categories = response.Data;
     }
