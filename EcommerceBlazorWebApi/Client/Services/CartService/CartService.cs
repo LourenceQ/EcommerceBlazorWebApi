@@ -11,7 +11,7 @@ public class CartService : ICartService
         _localStorage = localStorage;
     }
 
-    public event Action OnChange;
+    public event Action? OnChange;
 
     public async Task AddToCart(CartItem cartItem)
     {
