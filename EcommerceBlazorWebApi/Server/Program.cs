@@ -3,6 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 global using EcommerceBlazorWebApi.Server.Data;
 global using EcommerceBlazorWebApi.Server.Services.ProductService;
 global using EcommerceBlazorWebApi.Server.Services.CategoryService;
+global using EcommerceBlazorWebApi.Server.Services.CartService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,10 @@ builder.Services.AddDbContext<DataContext>(options =>
         .Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
