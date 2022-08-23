@@ -15,7 +15,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProduct()
+    public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProduct()
     {
         var result = await _productService.GetProductsAsync();
         return Ok(result);
@@ -29,7 +29,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("category/{categoryUrl}")]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProductsByCategory(string categoryUrl)
+    public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(string categoryUrl)
     {
         var result = await _productService.GetProductsByCategory(categoryUrl);
 
@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("searchsuggestions/{searchText}")]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetProductSearchSuggestions(string searchText)
+    public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductSearchSuggestions(string searchText)
     {
         var result = await _productService.GetProductSearchSuggestions(searchText);
 
@@ -53,7 +53,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("featured")]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Product>>>> GetFeaturedProducts()
+    public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
     {
         var result = await _productService.GetFeaturedProducts();
         return Ok(result);

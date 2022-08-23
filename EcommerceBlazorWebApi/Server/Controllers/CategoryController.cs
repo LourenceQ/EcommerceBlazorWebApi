@@ -14,7 +14,7 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
-    public async Task<ActionResult<ServiceResponse<IReadOnlyList<Category>>>> GetCategories()
+    public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategories()
     {
         var result = await _categoryService.GetCategories();
 

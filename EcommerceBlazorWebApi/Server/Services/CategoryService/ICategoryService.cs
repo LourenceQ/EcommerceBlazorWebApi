@@ -2,5 +2,5 @@
 
 public interface ICategoryService
 {
-    Task<ServiceResponse<IReadOnlyList<Category>>> GetCategories();
+    Task<ServiceResponse<List<Category>>> GetCategories();
 }
