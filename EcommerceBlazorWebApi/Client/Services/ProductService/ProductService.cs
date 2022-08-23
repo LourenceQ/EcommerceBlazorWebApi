@@ -9,7 +9,7 @@ public class ProductService : IProductService
         _http = http;
     }
 
-    public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
+    public List<Product> Products { get; set; } = new List<Product>();
 
     public string Message { get; set; } = "Loading products";
     public int CurrentPage { get; set; } = 1;
@@ -49,7 +49,7 @@ public class ProductService : IProductService
         ProductsChanged.Invoke();
     }
 
-    public async Task<IReadOnlyList<string>> GetProductSearchSuggestions(string searchText)
+    public async Task<List<string>> GetProductSearchSuggestions(string searchText)
     {
         var result = await _http
             .GetFromJsonAsync<ServiceResponse<List<string>>>(

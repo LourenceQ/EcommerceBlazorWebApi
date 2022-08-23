@@ -9,11 +9,11 @@ public class CategoryService : ICategoryService
         _context = context;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<Category>>> GetCategories()
+    public async Task<ServiceResponse<List<Category>>> GetCategories()
     {
         var categories = await _context.Categories.ToListAsync();
 
-        return new ServiceResponse<IReadOnlyList<Category>>
+        return new ServiceResponse<List<Category>>
         {
             Data = categories
         };

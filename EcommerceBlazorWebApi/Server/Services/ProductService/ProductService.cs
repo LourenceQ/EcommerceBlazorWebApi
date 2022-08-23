@@ -9,9 +9,9 @@ public class ProductService : IProductService
         _context = context;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<Product>>> GetFeaturedProducts()
+    public async Task<ServiceResponse<List<Product>>> GetFeaturedProducts()
     {
-        var response = new ServiceResponse<IReadOnlyList<Product>>
+        var response = new ServiceResponse<List<Product>>
         {
             Data = await _context.Products
                 .Where(p => p.Featured)
@@ -41,9 +41,9 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsAsync()
+    public async Task<ServiceResponse<List<Product>>> GetProductsAsync()
     {
-        var response = new ServiceResponse<IReadOnlyList<Product>>()
+        var response = new ServiceResponse<List<Product>>()
         {
             Data = await _context.Products
                 .Include(p => p.Variants)   
@@ -53,10 +53,10 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsByCategory(
+    public async Task<ServiceResponse<List<Product>>> GetProductsByCategory(
         string categoryUrl)
     {
-        var response = new ServiceResponse<IReadOnlyList<Product>>
+        var response = new ServiceResponse<List<Product>>
         {
             Data = await _context.Products.Where(p => 
                 p.Category!.Url.ToLower().Equals(categoryUrl.ToLower()))
@@ -67,7 +67,7 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<IReadOnlyList<string>>> GetProductSearchSuggestions(string searchText)
+    public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
     {
         var products = await FindProductBySearchText(searchText);
 
@@ -100,7 +100,7 @@ public class ProductService : IProductService
             }
         }
 
-        return new ServiceResponse<IReadOnlyList<string>> { Data = result };
+        return new ServiceResponse<List<string>> { Data = result };
     }
 
     public async Task<ServiceResponse<ProductSearchResultDto>> SearchProducts(string searchText, int page)

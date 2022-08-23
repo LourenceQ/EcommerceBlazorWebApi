@@ -9,12 +9,12 @@ public class CategoryService : ICategoryService
         _http = http;
     }
 
-    public IReadOnlyList<Category> Categories { get; set; } = new List<Category>();  
+    public List<Category> Categories { get; set; } = new List<Category>();  
 
     public async Task GetCategories()
     {
         var response = await _http
-            .GetFromJsonAsync<ServiceResponse<IReadOnlyList<Category>>>("api/category");
+            .GetFromJsonAsync<ServiceResponse<List<Category>>>("api/category");
 
         if(response != null && response.Data!= null)
             Categories = response.Data;

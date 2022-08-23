@@ -2,10 +2,10 @@
 
 public interface IProductService
 {
-    Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsAsync();
+    Task<ServiceResponse<List<Product>>> GetProductsAsync();
     Task<ServiceResponse<Product>> GetProductByIdAsync(int productId);
-    Task<ServiceResponse<IReadOnlyList<Product>>> GetProductsByCategory(string categoryUrl);
+    Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl);
     Task<ServiceResponse<ProductSearchResultDto>> SearchProducts(string searchText, int page);
-    Task<ServiceResponse<IReadOnlyList<string>>> GetProductSearchSuggestions(string searchText);
-    Task<ServiceResponse<IReadOnlyList<Product>>> GetFeaturedProducts();
+    Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText);
+    Task<ServiceResponse<List<Product>>> GetFeaturedProducts();
 }

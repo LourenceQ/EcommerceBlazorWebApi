@@ -2,6 +2,6 @@
 
 public interface ICategoryService
 {
-    IReadOnlyList<Category> Categories { get; set; }
+    List<Category> Categories { get; set; }
     Task GetCategories();
 }

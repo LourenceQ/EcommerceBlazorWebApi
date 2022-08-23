@@ -28,7 +28,7 @@ public class CartService : ICartService
         OnChange?.Invoke();
     }
 
-    public async Task<IReadOnlyList<CartItem>> GetCartItems()
+    public async Task<List<CartItem>> GetCartItems()
     {
         var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
         if (cart == null)
@@ -38,14 +38,14 @@ public class CartService : ICartService
         return cart;
     }
 
-    public async Task<IReadOnlyList<CartProductResponseDto>> GetCartProducts()
+    public async Task<List<CartProductResponseDto>> GetCartProducts()
     {
-        var cartItems = await _localStorage.GetItemAsync<IReadOnlyList<CartItem>>("cart");
+        var cartItems = await _localStorage.GetItemAsync<List<CartItem>>("cart");
 
-        var response = await _http.PostAsJsonAsync("api/cart;products", cartItems);
+        var response = await _http.PostAsJsonAsync("api/cart/products", cartItems);
 
         var cartProducts = await response
-            .Content.ReadFromJsonAsync<ServiceResponse<IReadOnlyList<CartProductResponseDto>>>();
+            .Content.ReadFromJsonAsync<ServiceResponse<List<CartProductResponseDto>>>();
 
         return cartProducts.Data;
 
