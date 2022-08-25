@@ -22,7 +22,14 @@ public class CartService : ICartService
         {
             cart = new List<CartItem>();
         }
-        cart.Add(cartItem);
+
+        var sameItem = cart.Find(i => i.ProductId == cartItem.ProductId
+            && i.ProductTypeId == cartItem.ProductTypeId);
+        
+        if(sameItem == null)    
+            cart.Add(cartItem);
+        else
+            sameItem.Quantity += cartItem.Quantity;
 
         await _localStorage.SetItemAsync("cart", cart);
         OnChange?.Invoke();
